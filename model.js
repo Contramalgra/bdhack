@@ -30,6 +30,14 @@ module.exports = {
         }
         return callback(null, topic);
       });
+    },
+    delete: (id, callback) => {
+      topics.remove({_id: id}, (err, removedTopic) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, removedTopic);
+      });
     }
   },
   answers: {
@@ -56,6 +64,14 @@ module.exports = {
         }
         return callback(null, answer);
       });
+    },
+    delete: (id, callback) => {
+      answers.remove({_id: id}, (err, removedAnswer) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, removedAnswer);
+      });
     }
   },
   comments: {
@@ -81,6 +97,14 @@ module.exports = {
           return callback(err, null);
         }
         return callback(null, comment);
+      });
+    },
+    delete: (id, callback) => {
+      comments.remove({_id: id}, (err, removedComment) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, removedComment);
       });
     }
   }
