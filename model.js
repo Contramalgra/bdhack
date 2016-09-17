@@ -33,9 +33,55 @@ module.exports = {
     }
   },
   answers: {
-
+    create: (answer, callback) => {
+      answers.insert(answer, (err, newAnswer) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, newAnswer);
+      });
+    },
+    listByTopic: (topicId, callback) => {
+      answers.find({topicId: topicId}, (err, answers) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, answers);
+      });
+    },
+    get: (id, callback) => {
+      answers.findOne({_id: id}, (err, answer) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, answer);
+      });
+    }
   },
   comments: {
-
+    create: (comment, callback) => {
+      comments.insert(comment, (err, newComment) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, newComment);
+      });
+    },
+    listByAnswer: (answerId, callback) => {
+      comments.find({answerId: answerId}, (err, comments) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, comments);
+      });
+    },
+    get: (id, callback) => {
+      comments.findOne({_id: id}, (err, comment) => {
+        if (err) {
+          return callback(err, null);
+        }
+        return callback(null, comment);
+      });
+    }
   }
 };
