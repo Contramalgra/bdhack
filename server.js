@@ -6,7 +6,7 @@ const model = require('./model.js');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/build', express.static('build'));
 
