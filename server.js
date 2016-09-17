@@ -3,7 +3,7 @@ const config = require('./config.json');
 
 const app = express();
 
-app.use('build', express.static('build'));
+app.use('/build', express.static('build'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
