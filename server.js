@@ -6,7 +6,7 @@ const model = require('./model.js');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/build', express.static('build'));
 
@@ -16,6 +16,8 @@ app.use('/api', proxy('https://api.builddirect.io', {
     proxyReq.headers['Ocp-Apim-Subscription-Key'] = config.apiKey;
   }
 }));
+
+// Topics endpoints
 
 app.post('/topics', (req, res) => {
   model.topics.create(req.body, (err, newTopic) => {
@@ -43,6 +45,73 @@ app.get('/topics/:id', (req, res) => {
     return res.send(topic);
   });
 });
+// --------
+
+// Answers endpoints
+
+app.post('/topics/:topicId/answers', (req, res) => {
+  if (!req.body.topicId) {
+    req.body.topicId = req.params.topicId;
+  }
+  model.answers.create(req.body, (err, newAnswer) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(newAnswer);
+  });
+});
+
+app.get('/topics/:topicId/answers', (req, res) => {
+  model.answers.listByTopic(req.params.topicId, (err, answers) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(answers);
+  });
+});
+
+app.get('/topics/:topicId/answers/:id', (req, res) => {
+  model.answers.get(req.params.id, (err, answer) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(answer);
+  });
+});
+// --------
+
+// Comments endpoints
+
+app.post('/topics/:topicId/answers/:answerId/comments', (req, res) => {
+  if (!req.body.answerId) {
+    req.body.answerId = req.params.answerId;
+  }
+  model.comments.create(req.body, (err, newComment) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(newComment);
+  });
+});
+
+app.get('/topics/:topicId/answers/:answerId/comments', (req, res) => {
+  model.comments.listByAnswer(req.params.answerId, (err, comments) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(comments);
+  });
+});
+
+app.get('/topics/:topicId/answers/:answerId/comments/:id', (req, res) => {
+  model.comments.get(req.params.id, (err, comment) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(comment);
+  });
+});
+// --------
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
