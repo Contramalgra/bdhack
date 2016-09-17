@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec 'npm run build && npm run server' --ignore node_modules --ignore build",
+    "start": "nodemon --exec 'browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ] && node server.js' --ignore node_modules --ignore build",
     "build": "browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ]",
     "server": "node server.js"
   },
