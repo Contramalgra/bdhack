@@ -57,7 +57,7 @@ class MainTable extends React.Component {
   				<tbody>
   					{this.state.filteredTopics.map(topic => 
               <tr key={topic._id}>
-                <td>{topic.title}</td>
+                <td><Link to={'/topics/' + topic._id + '/details'}>{topic.title}</Link></td>
                 <td>{topic.category}</td>
                 <td>{topic.budget}</td>
               </tr>
