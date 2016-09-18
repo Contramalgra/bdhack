@@ -3,6 +3,7 @@ import http from 'superagent';
 
 import BdProductInfo from './bdProductInfo';
 import AnswersForm from './answersForm';
+import Answers from './answers';
 
 class Topic extends React.Component {
 	constructor(props) {
@@ -21,6 +22,11 @@ class Topic extends React.Component {
 			.end((err, res) => {
 				this.setState({topic: res.body});
 	    });
+
+	  http.get(`/topics/${this.props.params.id}/answers`)
+	  	.end((err, res) => {
+	  		this.setState({answers: res.body});
+	  	});
   }
   addAnswer(answer) {
   	const answers = this.state.answers;
@@ -47,7 +53,8 @@ class Topic extends React.Component {
 				<h4>Materials</h4>
 				{this.state.topic.materials ? <BdProductInfo skus={this.state.topic.materials} /> : null}
 				<br />
-			
+				<h5>Community Solutions</h5>
+				<Answers answers={this.state.answers} />
 				<h5>Propose a solution</h5>
 				<AnswersForm onNewAnswer={this.addAnswer} topicId={this.state.topic._id} />
 			</div>
