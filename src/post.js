@@ -1,7 +1,7 @@
 import React from 'react';
 import http from 'superagent';
 
-class PostTopic extends React.Component {
+class Post extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -71,4 +71,4 @@ class PostTopic extends React.Component {
 	}
 }
 
-export default PostTopic;
+export default Post;
