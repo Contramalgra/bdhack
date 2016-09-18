@@ -3,7 +3,7 @@ import http from 'superagent';
 
 import BdProductInfo from './bdProductInfo';
 
-class Post extends React.Component {
+class Topic extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -90,4 +90,4 @@ class Post extends React.Component {
 	}
 }
 
-export default Post;
+export default Topic;
