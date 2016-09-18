@@ -38,11 +38,11 @@ class Topic extends React.Component {
 		return (
 			<div className="main">
 				<h3>{this.state.topic.title}</h3>
-				<div>
+				<div className="grid-section">
 					<h5>Category</h5>
 					<p>{this.state.topic.category}</p>
 				</div>
-				<div>
+				<div className="grid-section">
 					<h5>Budget</h5>
 					<p>{this.state.topic.budget}</p>
 				</div>

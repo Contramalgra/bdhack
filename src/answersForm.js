@@ -70,6 +70,12 @@ export default class AnswersForm extends React.Component {
         if (err) {
           return window.alert('Something went wrong, sorry');
         }
+        this.setState({
+          materials: [],
+          body: '',
+          material_cost: 0,
+          materialInfo: []
+        });
         return this.props.onNewAnswer(res.body);
       });
   }
@@ -86,6 +92,9 @@ export default class AnswersForm extends React.Component {
             <div>{product.data.productItemName}</div>
           </span>
         ))}
+        <div>
+          Total cost: {this.state.material_cost.toFixed(2)}
+        </div>
         <input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add Material</button><br />
         <button>Submit</button>
       </form>
