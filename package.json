@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec 'node-sass stylesheets/index.scss --output build & browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ] && node server.js' --ignore node_modules --ignore build",
+    "start": "nodemon --exec 'node-sass stylesheets/index.scss --output build && browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ] && node server.js' --watch . --ignore node_modules --ignore build",
     "build": "browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ]",
     "server": "node server.js"
   },
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/g1derekl/bdhack#readme",
   "dependencies": {
+    "async": "^2.0.1",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",

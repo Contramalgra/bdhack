@@ -41,7 +41,7 @@ class MainTable extends React.Component {
 	
 	render() {
 		return (
-      <div>
+      <div className="main">
         <select onChange={this.filter} value={this.state.filterCategory}>
           <option value="">All</option>
           {categories.map(category => <option key={category.value} value={category.value}>{category.name}</option>)}
@@ -50,14 +50,14 @@ class MainTable extends React.Component {
   				<thead>
   					<tr>
   						<th>Title</th>
-              <th>Category</th>
+							<th>Category</th>
   						<th>Budget</th>
   					</tr>
   				</thead>
   				<tbody>
   					{this.state.filteredTopics.map(topic => 
               <tr key={topic._id}>
-                <td>{topic.title}</td>
+                <td><Link to={'/topics/' + topic._id + '/details'}>{topic.title}</Link></td>
                 <td>{topic.category}</td>
                 <td>{topic.budget}</td>
               </tr>

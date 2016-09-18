@@ -6,10 +6,10 @@ class PostTopic extends React.Component {
 		super(props);
 
 		this.state = {
-			category: "Some category...",
-			budget: "Some budget...",
-			title: "The title...",
-			body: "The body...",
+			category: "",
+			budget: "",
+			title: "",
+			body: "",
 			materials: []
 		};
 
@@ -17,19 +17,25 @@ class PostTopic extends React.Component {
 		this.addMaterial = this.addMaterial.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
+	getBDSkus(url) { // Extract BuildDirect SKUs from user-provided product URLs
+		const rex = /[0-9]{8}/;
+		return rex.exec(url)[0];
+	}
 	
 	handleSubmit(e){
 		e.preventDefault();
-
-		debugger;
+		
+		const state = this.state;
+		state.materials = state.materials.map(this.getBDSkus);
 
 		http.post('/topics')
-			.send(this.state)
+			.send(state)
 			.end((err, res) => {
 				if (err) {
-					return window.alert('You suck');
+					return window.alert('Something went wrong, sorry.');
 				}
-				window.alert('Yay!!!!')
+				window.location = `/topics/${res.body._id}/details`
 			});
 	}
 	handleChange(e){
@@ -45,26 +51,28 @@ class PostTopic extends React.Component {
 	}
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				Title:<br />
-				<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
-				<select onChange={this.handleChange} name="category" value={this.state.category}>
-					<option value="kitchen">Kitchen</option>
-					<option value="bathroom">Bathroom</option>
-					<option value="outdoors">Outdoors</option>
-				</select>
-				Budget:<br />
-				<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
-				Body:<br />
-				<input type="text" name="body" onChange={this.handleChange} value={this.state.body} /><br />
-				<ul className="materials">
-					{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
-				</ul>
-				Materials
-				<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add</button><br />
+			<div className="main">
+				<form onSubmit={this.handleSubmit}>
+					Title:<br />
+					<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
+					<select onChange={this.handleChange} name="category" value={this.state.category}>
+						<option value="kitchen">Kitchen</option>
+						<option value="bathroom">Bathroom</option>
+						<option value="outdoors">Outdoors</option>
+					</select>
+					Budget:<br />
+					<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
+					Body:<br />
+					<input type="text" name="body" onChange={this.handleChange} value={this.state.body} /><br />
+					<ul className="materials">
+						{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
+					</ul>
+					Materials
+					<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add Material</button><br />
 
-				<button>Submit</button><br />	
-			</form>
+					<button>Submit</button><br />	
+				</form>
+			</div>
 		);
 	}
 }
