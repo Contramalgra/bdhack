@@ -45,28 +45,26 @@ class PostTopic extends React.Component {
 	}
 	render() {
 		return (
-			<div className="main">
-				<form onSubmit={this.handleSubmit}>
-					Title:<br />
-					<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
-					<select onChange={this.handleChange} name="category" value={this.state.category}>
-						<option value="kitchen">Kitchen</option>
-						<option value="bathroom">Bathroom</option>
-						<option value="outdoors">Outdoors</option>
-					</select>
-					Budget:<br />
-					<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
-					Body:<br />
-					<input type="text" name="body" onChange={this.handleChange} value={this.state.body} /><br />
-					<ul className="materials">
-						{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
-					</ul>
-					Materials
-					<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add</button><br />
+			<form onSubmit={this.handleSubmit}>
+				Title:<br />
+				<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
+				<select onChange={this.handleChange} name="category" value={this.state.category}>
+					<option value="kitchen">Kitchen</option>
+					<option value="bathroom">Bathroom</option>
+					<option value="outdoors">Outdoors</option>
+				</select>
+				Budget:<br />
+				<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
+				Body:<br />
+				<input type="text" name="body" onChange={this.handleChange} value={this.state.body} /><br />
+				<ul className="materials">
+					{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
+				</ul>
+				Materials
+				<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add</button><br />
 
-					<button>Submit</button><br />	
-				</form>
-			</div>
+				<button>Submit</button><br />	
+			</form>
 		);
 	}
 }
