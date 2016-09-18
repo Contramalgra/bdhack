@@ -6,10 +6,10 @@ class PostTopic extends React.Component {
 		super(props);
 
 		this.state = {
-			category: "Some category...",
-			budget: "Some budget...",
-			title: "The title...",
-			body: "The body...",
+			category: "",
+			budget: "",
+			title: "",
+			body: "",
 			materials: []
 		};
 
@@ -17,14 +17,20 @@ class PostTopic extends React.Component {
 		this.addMaterial = this.addMaterial.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
+	getBDSkus(url) { // Extract BuildDirect SKUs from user-provided product URLs
+		const rex = /[0-9]{8}/;
+		return rex.exec(url)[0];
+	}
 	
 	handleSubmit(e){
 		e.preventDefault();
-
-		debugger;
+		
+		const state = this.state;
+		state.materials = state.materials.map(this.getBDSkus);
 
 		http.post('/topics')
-			.send(this.state)
+			.send(state)
 			.end((err, res) => {
 				if (err) {
 					return window.alert('You suck');
