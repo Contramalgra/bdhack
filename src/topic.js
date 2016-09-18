@@ -2,48 +2,30 @@ import React from 'react';
 import http from 'superagent';
 
 import BdProductInfo from './bdProductInfo';
+import AnswersForm from './answersForm';
 
 class Topic extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			topic: {}
+			topic: {},
+			answers: []
 		};
 
-		this.handleChange = this.handleChange.bind(this);
-		this.addMaterial = this.addMaterial.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.addAnswer = this.addAnswer.bind(this);
 	}
 	
-	handleSubmit(e){
-		e.preventDefault();
-
-		http.post('/topics')
-			.send(this.state)
-			.end((err, res) => {
-				if (err) {
-					return window.alert('You suck');
-				}
-				window.alert('Yay!!!!')
-			});
-	}
-	handleChange(e){
-		const state = this.state;
-		state[e.target.name] = e.target.value;
-		this.setState(state);
-	}
-	addMaterial(){
-		const materials = this.state.materials;
-		materials.push(this.refs.material.value); 
-		this.setState({materials});
-		this.refs.material.value = "";
-	}
 	componentDidMount() {
     http.get('/topics/' + this.props.params.id)
 			.end((err, res) => {
 				this.setState({topic: res.body});
 	    });
+  }
+  addAnswer(answer) {
+  	const answers = this.state.answers;
+  	answers.push(answer);
+  	this.setState({answers});
   }
 	
 	render() {
@@ -66,11 +48,8 @@ class Topic extends React.Component {
 				{this.state.topic.materials ? <BdProductInfo skus={this.state.topic.materials} /> : null}
 				<br />
 			
-				<button className="startComment">Propose solution</button><br />
-				<form onSubmit={this.handleSubmit}>
-					
-					<button>Submit</button>	
-				</form>
+				<h5>Propose a solution</h5>
+				<AnswersForm onNewAnswer={this.addAnswer} topicId={this.state.topic._id} />
 			</div>
 		);
 	}

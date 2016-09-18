@@ -33,9 +33,9 @@ class PostTopic extends React.Component {
 			.send(state)
 			.end((err, res) => {
 				if (err) {
-					return window.alert('You suck');
+					return window.alert('Something went wrong, sorry.');
 				}
-				window.alert('Yay!!!!')
+				window.location = `/topics/${res.body._id}/details`
 			});
 	}
 	handleChange(e){
@@ -68,7 +68,7 @@ class PostTopic extends React.Component {
 						{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
 					</ul>
 					Materials
-					<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add</button><br />
+					<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add Material</button><br />
 
 					<button>Submit</button><br />	
 				</form>
