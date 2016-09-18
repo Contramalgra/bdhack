@@ -1,7 +1,7 @@
 import React from 'react';
 import http from 'superagent';
 
-class PostTopic extends React.Component {
+class Post extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -43,17 +43,27 @@ class PostTopic extends React.Component {
 		this.setState({materials});
 		this.refs.material.value = "";
 	}
+	componentDidMount() {
+    http.get('/topics/' + id)
+		.end((err, res) => {
+			this.setState({topics: res.body, filteredTopics: res.body});
+    });
+  }
+	
 	render() {
 		return (
 			<div className="main">
 				<form onSubmit={this.handleSubmit}>
+					<h3>{topic.title}</h3>
+					<textarea name="category" value={topic.category} />
+					<textarea name="budget" value={topic.budget} />
+					<textarea name="body" value={topic.description} />
+					<textarea name="materials" value={topic.materials} />
+					
+					
 					Title:<br />
 					<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
-					<select onChange={this.handleChange} name="category" value={this.state.category}>
-						<option value="kitchen">Kitchen</option>
-						<option value="bathroom">Bathroom</option>
-						<option value="outdoors">Outdoors</option>
-					</select>
+					
 					Budget:<br />
 					<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
 					Body:<br />
@@ -71,4 +81,4 @@ class PostTopic extends React.Component {
 	}
 }
 
-export default PostTopic;
+export default Post;
