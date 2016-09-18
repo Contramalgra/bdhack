@@ -11,17 +11,26 @@ class PostTopic extends React.Component {
 			title: "The title...",
 			body: "The body...",
 			materials: []
-		}
-	}
+		};
 
-	componentDidMount() {
-		http.get('/topics')
-			.end((err, res) => {
-        this.setState({topics: res.body});
-		});
+		this.handleChange = this.handleChange.bind(this);
+		this.addMaterial = this.addMaterial.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	
 	handleSubmit(e){
+		e.preventDefault();
+
+		debugger;
+
+		http.post('/topics')
+			.send(this.state)
+			.end((err, res) => {
+				if (err) {
+					return window.alert('You suck');
+				}
+				window.alert('Yay!!!!')
+			});
 	}
 	handleChange(e){
 		const state = this.state;
@@ -32,27 +41,27 @@ class PostTopic extends React.Component {
 		const materials = this.state.materials;
 		materials.push(this.refs.material.value); 
 		this.setState({materials});
-		this.refs.materials.value = "";
+		this.refs.material.value = "";
 	}
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
 				Title:<br />
 				<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
-				<select onChange={this.handleChange} value={this.state.category}>
+				<select onChange={this.handleChange} name="category" value={this.state.category}>
 					<option value="kitchen">Kitchen</option>
 					<option value="bathroom">Bathroom</option>
 					<option value="outdoors">Outdoors</option>
 				</select>
 				Budget:<br />
-				<input type="text" name="budget" onChnage={this.handleChange} value={this.state.budget}/><br />
+				<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
 				Body:<br />
-				<input type="text" name="Body" /><br />
+				<input type="text" name="body" onChange={this.handleChange} value={this.state.body} /><br />
 				<ul className="materials">
-					{this.state.materials.map((material, index) => <tr key={index}><td>{material}</td></tr>)}
+					{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
 				</ul>
-
-				<input type="text" name="material" ref="material"/><button type="btn" onClick={this.addMaterial}>Add</button><br />
+				Materials
+				<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add</button><br />
 
 				<button>Submit</button><br />	
 			</form>
