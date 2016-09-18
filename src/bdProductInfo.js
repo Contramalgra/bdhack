@@ -30,6 +30,15 @@ export default class BdProductInfo extends React.Component {
   }
 
   render() {
-    return null;
+    return (
+      <span>
+        {this.state.products.map((product, index) => (
+          <span key={index} className="product-preview">
+            <img src={product.data.mainImage.thumbnails[1].url} />
+            <div>{product.data.productItemName}</div>
+          </span>
+        ))}
+      </span>
+    )
   }
 }

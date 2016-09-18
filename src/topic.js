@@ -49,41 +49,27 @@ class Topic extends React.Component {
 	render() {
 		return (
 			<div className="main">
+				<h3>{this.state.topic.title}</h3>
+				<div>
+					<h5>Category</h5>
+					<p>{this.state.topic.category}</p>
+				</div>
+				<div>
+					<h5>Budget</h5>
+					<p>{this.state.topic.budget}</p>
+				</div>
+				<div>
+					<h5>Description</h5>
+					<p>{this.state.topic.body}</p>
+				</div>
+				<h4>Materials</h4>
+				{this.state.topic.materials ? <BdProductInfo skus={this.state.topic.materials} /> : null}
+				<br />
+			
+				<button className="startComment">Propose solution</button><br />
 				<form onSubmit={this.handleSubmit}>
-					<h3>{this.state.topic.title}</h3>
-					<div>
-						<h5>Category</h5>
-						<p>{this.state.topic.category}</p>
-					</div>
-					<div>
-						<h5>Budget</h5>
-						<p>{this.state.topic.budget}</p>
-					</div>
-					<div>
-						<h5>Description</h5>
-						<p>{this.state.topic.body}</p>
-					</div>
-					<h4>Materials</h4>
-					{this.state.topic.materials ? <BdProductInfo skus={this.state.topic.materials} /> : null}
-					<br />
-				
-					<button className="startComment">Comment</button><br />
-					<div id="wrapper">
-						<ul id="top">
-							<li><a href="#one">One</a></li>
-							<li><a href="#two">Two</a></li>
-						</ul>
-						<div className="commentBox" id="one">
-							<p>One</p>
-							<span><a href="#top">Close</a></span>
-						</div>
-						<div className="commentBox" id="two">
-							<p>Two</p>
-							<span><a href="#top">Close</a></span>
-						</div>
-					</div>
-
-					<button>Submit</button><br />	
+					
+					<button>Submit</button>	
 				</form>
 			</div>
 		);
