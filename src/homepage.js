@@ -50,7 +50,7 @@ class MainTable extends React.Component {
   				<thead>
   					<tr>
   						<th>Title</th>
-              <th>Category</th>
+							<th>Category</th>
   						<th>Budget</th>
   					</tr>
   				</thead>

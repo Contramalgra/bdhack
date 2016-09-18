@@ -58,21 +58,23 @@ class Post extends React.Component {
 					<textarea name="category" value={topic.category} />
 					<textarea name="budget" value={topic.budget} />
 					<textarea name="body" value={topic.description} />
-					<textarea name="materials" value={topic.materials} />
-					
-					
-					Title:<br />
-					<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
-					
-					Budget:<br />
-					<input type="text" name="budget" onChange={this.handleChange} value={this.state.budget}/><br />
-					Body:<br />
-					<input type="text" name="body" onChange={this.handleChange} value={this.state.body} /><br />
-					<ul className="materials">
-						{this.state.materials.map((material, index) => <li key={index}>{material}</li>)}
-					</ul>
-					Materials
-					<input type="text" name="material" ref="material"/><button type="button" onClick={this.addMaterial}>Add</button><br />
+					<h4>Materials</h4><br />
+				
+					<button startComment>Comment</button><br />
+					<div id="wrapper">
+						<ul id="top">
+							<li><a href="#one">One</a></li>
+							<li><a href="#two">Two</a></li>
+						</ul>
+						<div class="commentBox" id="one">
+							<p>One</p>
+							<span><a href="#top">Close</a></span>
+						</div>
+						<div class="commentBox" id="two">
+							<p>Two</p>
+							<span><a href="#top">Close</a></span>
+						</div>
+					</div>
 
 					<button>Submit</button><br />	
 				</form>
