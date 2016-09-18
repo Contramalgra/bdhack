@@ -113,7 +113,7 @@ app.get('/topics/:topicId/answers/:answerId/comments/:id', (req, res) => {
 });
 // --------
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 

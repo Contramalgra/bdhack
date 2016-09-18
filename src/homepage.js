@@ -1,5 +1,6 @@
 import React from 'react';
 import http from 'superagent';
+import {Link} from 'react-router';
 
 const categories = [
   {name: 'Kitchen', value: 'kitchen'},
@@ -63,6 +64,7 @@ class MainTable extends React.Component {
             )}
   				</tbody>
   			</table>
+        <Link to={'/new-topic'}>New Topic</Link>
       </div>
 		);
 	}
