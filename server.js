@@ -47,11 +47,11 @@ app.get('/topics/:id', (req, res) => {
 });
 
 app.delete('/topics/:id', (req, res) => {
-  model.topics.delete(req.params.id, (err, deletedTopic) => {
+  model.topics.delete(req.params.id, (err, numRemoved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.send(deletedTopic);
+    return res.send({numRemoved});
   });
 });
 // --------
@@ -89,11 +89,11 @@ app.get('/topics/:topicId/answers/:id', (req, res) => {
 });
 
 app.delete('/topics/:topicId/answers/:id', (req, res) => {
-  model.answers.delete(req.params.id, (err, deletedAnswer) => {
+  model.answers.delete(req.params.id, (err, numRemoved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.send(deletedAnswer);
+    return res.send({numRemoved});
   });
 });
 // --------
@@ -131,11 +131,11 @@ app.get('/topics/:topicId/answers/:answerId/comments/:id', (req, res) => {
 });
 
 app.delete('/topics/:topicId/answers/:answerId/comments/:id', (req, res) => {
-  model.comments.delete(req.params.id, (err, deletedComment) => {
+  model.comments.delete(req.params.id, (err, numRemoved) => {
     if (err) {
       return res.status(500).send(err);
     }
-    return res.send(deletedComment);
+    return res.send({numRemoved});
   });
 });
 // --------
