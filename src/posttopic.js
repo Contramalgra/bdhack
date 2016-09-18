@@ -45,7 +45,7 @@ class PostTopic extends React.Component {
 	}
 	render() {
 		return (
-			<span>
+			<div className="main">
 				<form onSubmit={this.handleSubmit}>
 					Title:<br />
 					<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
@@ -66,7 +66,7 @@ class PostTopic extends React.Component {
 
 					<button>Submit</button><br />	
 				</form>
-			</span>
+			</div>
 		);
 	}
 }
