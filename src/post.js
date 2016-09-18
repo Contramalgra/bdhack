@@ -10,7 +10,8 @@ class Post extends React.Component {
 			budget: "Some budget...",
 			title: "The title...",
 			body: "The body...",
-			materials: []
+			materials: [],
+			topic: {}
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -20,8 +21,6 @@ class Post extends React.Component {
 	
 	handleSubmit(e){
 		e.preventDefault();
-
-		debugger;
 
 		http.post('/topics')
 			.send(this.state)
@@ -44,33 +43,33 @@ class Post extends React.Component {
 		this.refs.material.value = "";
 	}
 	componentDidMount() {
-    http.get('/topics/' + id)
-		.end((err, res) => {
-			this.setState({topics: res.body, filteredTopics: res.body});
-    });
+    http.get('/topics/' + this.props.params.id)
+			.end((err, res) => {
+				this.setState({topic: res.body});
+	    });
   }
 	
 	render() {
 		return (
 			<div className="main">
 				<form onSubmit={this.handleSubmit}>
-					<h3>{topic.title}</h3>
-					<textarea name="category" value={topic.category} />
-					<textarea name="budget" value={topic.budget} />
-					<textarea name="body" value={topic.description} />
+					<h3>{this.state.topic.title}</h3>
+					<textarea name="category" value={this.state.topic.category} />
+					<textarea name="budget" value={this.state.topic.budget} />
+					<textarea name="body" value={this.state.topic.description} />
 					<h4>Materials</h4><br />
 				
-					<button startComment>Comment</button><br />
+					<button className="startComment">Comment</button><br />
 					<div id="wrapper">
 						<ul id="top">
 							<li><a href="#one">One</a></li>
 							<li><a href="#two">Two</a></li>
 						</ul>
-						<div class="commentBox" id="one">
+						<div className="commentBox" id="one">
 							<p>One</p>
 							<span><a href="#top">Close</a></span>
 						</div>
-						<div class="commentBox" id="two">
+						<div className="commentBox" id="two">
 							<p>Two</p>
 							<span><a href="#top">Close</a></span>
 						</div>
