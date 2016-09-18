@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec 'browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ] && node server.js' --ignore node_modules --ignore build",
+    "start": "nodemon --exec 'node-sass stylesheets/index.scss --output build & browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ] && node server.js' --ignore node_modules --ignore build",
     "build": "browserify src/index.js -o build/index.js -t [ babelify --presets [ es2015 react ] ]",
     "server": "node server.js"
   },
@@ -28,6 +28,7 @@
     "express": "^4.14.0",
     "express-http-proxy": "^0.10.0",
     "nedb": "^1.8.0",
+    "node-sass": "^3.10.0",
     "nodemon": "^1.10.2",
     "npm": "^3.10.7",
     "react": "^15.3.1",

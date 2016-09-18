@@ -32,11 +32,11 @@ module.exports = {
       });
     },
     delete: (id, callback) => {
-      topics.remove({_id: id}, (err, removedTopic) => {
+      topics.remove({_id: id}, (err, numRemoved) => {
         if (err) {
           return callback(err, null);
         }
-        return callback(null, removedTopic);
+        return callback(null, numRemoved);
       });
     }
   },
@@ -66,11 +66,11 @@ module.exports = {
       });
     },
     delete: (id, callback) => {
-      answers.remove({_id: id}, (err, removedAnswer) => {
+      answers.remove({_id: id}, (err, numRemoved) => {
         if (err) {
           return callback(err, null);
         }
-        return callback(null, removedAnswer);
+        return callback(null, numRemoved);
       });
     }
   },
@@ -100,11 +100,11 @@ module.exports = {
       });
     },
     delete: (id, callback) => {
-      comments.remove({_id: id}, (err, removedComment) => {
+      comments.remove({_id: id}, (err, numRemoved) => {
         if (err) {
           return callback(err, null);
         }
-        return callback(null, removedComment);
+        return callback(null, numRemoved);
       });
     }
   }
