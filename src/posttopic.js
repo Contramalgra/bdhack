@@ -37,24 +37,24 @@ class PostTopic extends React.Component {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-			Title:<br>
-			<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br>
-			<select onChange={this.handleChange} value={this.state.category}>
-				<option value="kitchen">Kitchen</option>
-				<option value="bathroom">Bathroom</option>
-				<option value="outdoors">Outdoors</option>
-			</select>
-			Budget:<br>
-			<input type="text" name="budget" onChnage={this.handleChange} value={this.state.budget}/><br>
-			Body:<br>
-			<input type="text" name="Body"><br>
-			<ul className="materials">
-				{this.state.materials.map((material, index) => <tr key={index}><td>{material}</td>)}
-			</ul>
+				Title:<br />
+				<input type="text" name="title" onChange={this.handleChange} value={this.state.title}/><br />
+				<select onChange={this.handleChange} value={this.state.category}>
+					<option value="kitchen">Kitchen</option>
+					<option value="bathroom">Bathroom</option>
+					<option value="outdoors">Outdoors</option>
+				</select>
+				Budget:<br />
+				<input type="text" name="budget" onChnage={this.handleChange} value={this.state.budget}/><br />
+				Body:<br />
+				<input type="text" name="Body" /><br />
+				<ul className="materials">
+					{this.state.materials.map((material, index) => <tr key={index}><td>{material}</td></tr>)}
+				</ul>
 
-			<input type="text" name="material" ref="material"/><button type="btn" onClick={this.addMaterial}>Add</button><br>				
-			
-			<button>Submit</button><br>	
+				<input type="text" name="material" ref="material"/><button type="btn" onClick={this.addMaterial}>Add</button><br />
+
+				<button>Submit</button><br />	
 			</form>
 		);
 	}
