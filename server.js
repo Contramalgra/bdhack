@@ -45,6 +45,15 @@ app.get('/topics/:id', (req, res) => {
     return res.send(topic);
   });
 });
+
+app.delete('/topics/:id', (req, res) => {
+  model.topics.delete(req.params.id, (err, deletedTopic) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(deletedTopic);
+  });
+});
 // --------
 
 // Answers endpoints
@@ -78,6 +87,15 @@ app.get('/topics/:topicId/answers/:id', (req, res) => {
     return res.send(answer);
   });
 });
+
+app.delete('/topics/:topicId/answers/:id', (req, res) => {
+  model.answers.delete(req.params.id, (err, deletedAnswer) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(deletedAnswer);
+  });
+});
 // --------
 
 // Comments endpoints
@@ -109,6 +127,15 @@ app.get('/topics/:topicId/answers/:answerId/comments/:id', (req, res) => {
       return res.status(500).send(err);
     }
     return res.send(comment);
+  });
+});
+
+app.delete('/topics/:topicId/answers/:answerId/comments/:id', (req, res) => {
+  model.comments.delete(req.params.id, (err, deletedComment) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(deletedComment);
   });
 });
 // --------
