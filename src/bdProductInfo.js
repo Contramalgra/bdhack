@@ -30,6 +30,6 @@ export default class BdProductInfo extends React.Component {
   }
 
   render() {
-
+    return null;
   }
 }

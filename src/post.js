@@ -1,16 +1,13 @@
 import React from 'react';
 import http from 'superagent';
 
+import BdProductInfo from './bdProductInfo';
+
 class Post extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			category: "Some category...",
-			budget: "Some budget...",
-			title: "The title...",
-			body: "The body...",
-			materials: [],
 			topic: {}
 		};
 
@@ -54,10 +51,21 @@ class Post extends React.Component {
 			<div className="main">
 				<form onSubmit={this.handleSubmit}>
 					<h3>{this.state.topic.title}</h3>
-					<textarea name="category" value={this.state.topic.category} />
-					<textarea name="budget" value={this.state.topic.budget} />
-					<textarea name="body" value={this.state.topic.description} />
-					<h4>Materials</h4><br />
+					<div>
+						<h5>Category</h5>
+						<p>{this.state.topic.category}</p>
+					</div>
+					<div>
+						<h5>Budget</h5>
+						<p>{this.state.topic.budget}</p>
+					</div>
+					<div>
+						<h5>Description</h5>
+						<p>{this.state.topic.body}</p>
+					</div>
+					<h4>Materials</h4>
+					{this.state.topic.materials ? <BdProductInfo skus={this.state.topic.materials} /> : null}
+					<br />
 				
 					<button className="startComment">Comment</button><br />
 					<div id="wrapper">
